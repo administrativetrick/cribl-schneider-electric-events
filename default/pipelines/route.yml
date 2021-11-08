@@ -1,0 +1,21 @@
+id: default
+groups: {}
+routes:
+  - id: Bnsypu
+    name: ups
+    final: true
+    disabled: false
+    pipeline: ups
+    description: ""
+    clones: []
+    filter: "true"
+    output: default
+  - id: default
+    name: default
+    final: true
+    disabled: false
+    pipeline: main
+    description: ""
+    clones: []
+    filter: "true"
+    output: default

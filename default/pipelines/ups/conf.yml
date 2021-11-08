@@ -1,0 +1,30 @@
+output: default
+groups: {}
+asyncFuncTimeout: 1000
+functions:
+  - id: regex_extract
+    filter: "true"
+    disabled: null
+    conf:
+      source: _raw
+      iterations: 100
+      overwrite: false
+      regex: /(?<=')(?<user>.*)(?=')/
+      regexList:
+        - regex: /(?<=:\s)(?<self_test_results>.*)(?=\.)/
+        - regex: /(?<=from\s)(?<src_ip>(?<!\d)(?:(?:[01]?\d\d?|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d\d?|2[0-4]\d|25[0-5])(?!\d))(?=\.)/
+        - regex: /(?<='\s)(?<action>(logged\sin|logged\sout))(?=\s)/
+  - id: eval
+    filter: "true"
+    disabled: null
+    conf:
+      add:
+        - name: index
+          value: "'ups'"
+      remove:
+        - severity
+        - facilityName
+        - facility
+        - appname
+      keep:
+        - host
